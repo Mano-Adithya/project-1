@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: HelloWorld.class
+    destination: /home/ec2-user/helloworld/
+
+hooks:
+  BeforeInstall:
+    - location: scripts/stop_application.sh
+      timeout: 300
+      runas: ec2-user
+
+  AfterInstall:
+    - location: scripts/start_application.sh
+      timeout: 300
+      runas: ec2-user
